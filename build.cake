@@ -81,7 +81,6 @@ Task("Build")
 
 
 Task("GitLink")
-	.IsDependentOn("UnitTest")
 	//pdbstr.exe and costura are not xplat currently
 	.WithCriteria(() => IsRunningOnWindows())
 	.WithCriteria(() => 
