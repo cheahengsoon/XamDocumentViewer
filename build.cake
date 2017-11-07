@@ -81,7 +81,6 @@ Task("Build")
 
 
 Task("GitLink")
-	.IsDependentOn("UnitTest")
 	//pdbstr.exe and costura are not xplat currently
 	.WithCriteria(() => IsRunningOnWindows())
 	.WithCriteria(() => 
@@ -119,7 +118,6 @@ Task("GitLink")
 
 
 Task("UploadAppVeyorArtifact")
-	.IsDependentOn("Package")
 	.WithCriteria(() => !AppVeyor.Environment.PullRequest.IsPullRequest)
 	.WithCriteria(() => isRunningOnAppVeyor)
 	.Does(() => {
@@ -133,7 +131,6 @@ Task("UploadAppVeyorArtifact")
 });
 
 Task("Default")
-	.IsDependentOn("PublishPackages")
 	.IsDependentOn("UploadAppVeyorArtifact")
 	.Does(() => 
 {
