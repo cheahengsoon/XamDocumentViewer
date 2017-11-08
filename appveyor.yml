@@ -9,6 +9,12 @@ assembly_info:
   assembly_informational_version: '{version}'
 install: 
   - ps: nuget sources add -Name XamarinSyncfusion -Source http://nuget.syncfusion.com/nuget_xamarin/nuget/getsyncfusionpackages/xamarin
+  - ps: Write-Host "Downloading latest .NET Core SDK..."
+  - ps: (New-Object System.Net.WebClient).DownloadFile('https://go.microsoft.com/fwlink/?linkid=841686','dotnet-core-sdk.exe')
+  - ps: # Invoke-WebRequest "https://go.microsoft.com/fwlink/?linkid=841686" -OutFile "dotnet-core-sdk.exe"
+  - ps: Write-Host "Installing .NET Core SDK..."
+  - ps: Invoke-Command -ScriptBlock { ./dotnet-core-sdk.exe /S /v/qn }
+  - ps: Write-Host "Installation succeeded." -ForegroundColor Green
   - ps: Write-Host "Installing Windows 10 SDK for Fall Creators Update (10.0.16299.15)..." -ForegroundColor Cyan
   - ps: Write-Host "Downloading Windows 10 SDK..."
   - ps: $exePath = "$env:TEMP\winsdksetup.exe"
@@ -22,9 +28,6 @@ install:
   - echo y | "C:\Program Files (x86)\Android\android-sdk\tools\android.bat" update sdk -u -a -t android-25
   - echo y | "C:\Program Files (x86)\Android\android-sdk\tools\android.bat" update sdk -u -a -t android-15
 build_script:
-- ps: >-
-    .\install-dotnet.ps1
-    dotnet --version
 - cmd: >-
     powershell .\build.ps1 -Target Default -Verbosity diagnostic
 artifacts:
