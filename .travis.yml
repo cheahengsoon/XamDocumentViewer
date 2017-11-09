@@ -1,0 +1,11 @@
+solution: XamDocumentViewer.sln
+language: csharp
+dist: trusty
+sudo: required
+mono: none
+dotnet: 2.0.0
+script:
+  - cd XamDocumentViewer/XamDocumentViewer.Android
+  - dotnet build -c Release XamDocumentViewer.Android.csproj
+  - cd ../XamDocumentViewer.UWP
+  - dotnet build -c Release XamDocumentViewer.UWP.csproj
