@@ -8,7 +8,6 @@ assembly_info:
   assembly_file_version: '{version}'
   assembly_informational_version: '{version}'
 install: 
-  - ps: nuget sources add -Name XamarinSyncfusion -Source http://nuget.syncfusion.com/nuget_xamarin/nuget/getsyncfusionpackages/xamarin
   - ps: Write-Host "Downloading latest .NET Core SDK..."
   - ps: (New-Object System.Net.WebClient).DownloadFile('https://go.microsoft.com/fwlink/?linkid=841686',"$env:appveyor_build_folder\dotnet-core-sdk.exe")
   - ps: # Invoke-WebRequest "https://go.microsoft.com/fwlink/?linkid=841686" -OutFile "dotnet-core-sdk.exe"
