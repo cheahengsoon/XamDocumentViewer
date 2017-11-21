@@ -1,8 +1,9 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.1",
-    "Syncfusion.Xamarin.DocIO": "15.3.0.33",
-    "Xamarin.Forms": "2.4.0.38779"
+    "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.2",
+    "Syncfusion.Xamarin.Compression": "15.4.0.17",
+    "Syncfusion.Xamarin.DocIO": "15.4.0.17",
+    "Xamarin.Forms": "2.5.0.91635"
   },
   "frameworks": {
     "uap10.0.16299": {}
