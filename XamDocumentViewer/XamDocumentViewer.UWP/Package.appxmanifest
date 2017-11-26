@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="38806TusharKoshti.MyDocumentViewer" Publisher="CN=BE70A07A-CB3A-494E-86FA-451647E2B4C5" Version="1.1.0.0" />
+  <Identity Name="38806TusharKoshti.MyDocumentViewer" Publisher="CN=BE70A07A-CB3A-494E-86FA-451647E2B4C5" Version="1.1.1.0" />
   <mp:PhoneIdentity PhoneProductId="6a69bec1-ed7b-44a8-9690-2f1c20ee0755" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>My Document Viewer</DisplayName>
