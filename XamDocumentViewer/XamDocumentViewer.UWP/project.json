@@ -1,5 +1,6 @@
 ﻿{
   "dependencies": {
+    "CrossFileHelper": "1.1.2",
     "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.5",
     "Syncfusion.Xamarin.Compression": "15.4.0.17",
     "Syncfusion.Xamarin.DocIO": "15.4.0.17",

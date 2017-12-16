@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CrossFileHelper" Version="1.1.2" />
     <PackageReference Include="Syncfusion.Xamarin.Compression" Version="15.4.0.17">
       <NoWarn>NU1701</NoWarn>
     </PackageReference>

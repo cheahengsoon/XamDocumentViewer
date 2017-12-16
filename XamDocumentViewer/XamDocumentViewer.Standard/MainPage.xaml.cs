@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using CrossFileHelper.Entities;
+using System;
+using System.IO;
 using Xamarin.Forms;
 using XamDocumentViewer.Standard.Abstractions;
 using XamDocumentViewer.Standard.Dtos;
@@ -59,6 +61,32 @@ namespace XamDocumentViewer.Standard
 			}
 			LoadingSpinner.IsRunning = false;
 			LoadingSpinner.IsVisible = false;
+		}
+
+		private async void ToolbarItem_Clicked(object sender, EventArgs e)
+		{
+			FileData fileData = await CrossFileHelper.CrossFileHelper.Current.PickFile();
+			if (fileData != null)
+			{
+				mFileStream = fileData.GetStream();
+
+				mHtmlFileName = "Test.html";
+
+				DocumentHelper documentHelper = new DocumentHelper();
+				await documentHelper.ConvertToHTML(mFileStream, mHtmlFileName, mDocumentType);
+				mFileStream.Dispose();
+
+				Stream htmlReaderStream = await DependencyService.Get<ISaveAndLoad>().GetLocalFileInputStreamAsync(mHtmlFileName);
+
+				StreamReader streamReader = new StreamReader(htmlReaderStream);
+				string htmlContent = await streamReader.ReadToEndAsync();
+				streamReader.Dispose();
+
+				webView.Source = new HtmlWebViewSource
+				{
+					Html = htmlContent
+				};
+			}
 		}
 	}
 }
