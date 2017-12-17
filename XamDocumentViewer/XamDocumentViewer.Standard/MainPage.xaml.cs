@@ -16,6 +16,7 @@ namespace XamDocumentViewer.Standard
 
 		public MainPage()
 		{
+			Title = "My Document Viewer";
 			InitializeComponent();
 		}
 
@@ -33,19 +34,23 @@ namespace XamDocumentViewer.Standard
 			LoadingSpinner.IsRunning = true;
 			LoadingSpinner.IsVisible = true;
 
-			if (mFileStream != null)
+			if (mFileStream != null && !string.IsNullOrWhiteSpace(mDocumentType))
 			{
 				mHtmlFileName = "Test.html";
 
 				DocumentHelper documentHelper = new DocumentHelper();
 				await documentHelper.ConvertToHTML(mFileStream, mHtmlFileName, mDocumentType);
 				mFileStream.Dispose();
+				mFileStream = null;
 
-				Stream htmlReaderStream = await DependencyService.Get<ISaveAndLoad>().GetLocalFileInputStreamAsync(mHtmlFileName);
-
-				StreamReader streamReader = new StreamReader(htmlReaderStream);
-				string htmlContent = await streamReader.ReadToEndAsync();
-				streamReader.Dispose();
+				string htmlContent = null;
+				using (Stream htmlReaderStream = await DependencyService.Get<ISaveAndLoad>().GetLocalFileInputStreamAsync(mHtmlFileName))
+				{
+					using (StreamReader streamReader = new StreamReader(htmlReaderStream))
+					{
+						htmlContent = await streamReader.ReadToEndAsync();
+					}
+				}
 
 				webView.Source = new HtmlWebViewSource
 				{
@@ -65,23 +70,27 @@ namespace XamDocumentViewer.Standard
 
 		private async void ToolbarItem_Clicked(object sender, EventArgs e)
 		{
+			mDocumentType = null;
 			FileData fileData = await CrossFileHelper.CrossFileHelper.Current.PickFile();
 			if (fileData != null)
 			{
 				mFileStream = fileData.GetStream();
-
-				mHtmlFileName = "Test.html";
-
-				DocumentHelper documentHelper = new DocumentHelper();
-				await documentHelper.ConvertToHTML(mFileStream, mHtmlFileName, mDocumentType);
-				mFileStream.Dispose();
-
-				Stream htmlReaderStream = await DependencyService.Get<ISaveAndLoad>().GetLocalFileInputStreamAsync(mHtmlFileName);
-
-				StreamReader streamReader = new StreamReader(htmlReaderStream);
-				string htmlContent = await streamReader.ReadToEndAsync();
-				streamReader.Dispose();
-
+				//using (mFileStream = await CrossFileHelper.CrossFileHelper.Current.GetFileReadStreamAsync(fileData.FilePath))
+				//{
+					mHtmlFileName = "Test.html";
+					DocumentHelper documentHelper = new DocumentHelper();
+					await documentHelper.ConvertToHTML(mFileStream, mHtmlFileName, mDocumentType);
+					mFileStream.Dispose();
+					mFileStream = null;
+				//}
+				string htmlContent = null;
+				using (Stream htmlReaderStream = await DependencyService.Get<ISaveAndLoad>().GetLocalFileInputStreamAsync(mHtmlFileName))
+				{
+					using (StreamReader streamReader = new StreamReader(htmlReaderStream))
+					{
+						htmlContent = await streamReader.ReadToEndAsync();
+					}
+				}
 				webView.Source = new HtmlWebViewSource
 				{
 					Html = htmlContent

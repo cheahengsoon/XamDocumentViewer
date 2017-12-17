@@ -13,18 +13,17 @@ namespace XamDocumentViewer.Standard.Helpers
 		{
 			//Loads the template document
 
-			WordDocument document = new WordDocument(inputDocStream, FormatType.Docx);
+			using (WordDocument document = new WordDocument(inputDocStream, FormatType.Docx))
+			{
 
-			Stream outputStream = await DependencyService.Get<ISaveAndLoad>().GetLocalFileOutputStreamAsync(outputFileName);
+				using (Stream outputStream = await DependencyService.Get<ISaveAndLoad>().GetLocalFileOutputStreamAsync(outputFileName))
+				{
 
-			//Saves the document as Html file
+					//Saves the document as Html file
 
-			document.Save(outputStream, FormatType.Html);
-
-			//Closes the document 
-
-			document.Close();
-			outputStream.Dispose();
+					document.Save(outputStream, FormatType.Html);
+				}
+			}
 		}
 	}
 }
