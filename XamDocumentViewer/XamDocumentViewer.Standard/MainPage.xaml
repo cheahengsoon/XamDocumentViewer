@@ -4,6 +4,9 @@
              xmlns:local="clr-namespace:XamDocumentViewer.Standard"
 			 xmlns:controls="clr-namespace:XamDocumentViewer.Standard.Controls;assembly=XamDocumentViewer.Standard"
              x:Class="XamDocumentViewer.Standard.MainPage">
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Name="MenuItemOpenFile" Icon="OpenFile.png" Order="Primary" Text="Open file" Priority="0" Activated="ToolbarItem_Clicked" />
+	</ContentPage.ToolbarItems>
     <ContentPage.Content>
 		<StackLayout>
 			<ActivityIndicator x:Name="LoadingSpinner"

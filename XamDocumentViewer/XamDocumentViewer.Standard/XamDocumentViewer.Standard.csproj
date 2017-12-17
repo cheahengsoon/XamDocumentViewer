@@ -5,12 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Syncfusion.Xamarin.Compression" Version="15.3.0.33">
+    <PackageReference Include="CrossFileHelper" Version="1.1.2" />
+    <PackageReference Include="Syncfusion.Xamarin.Compression" Version="15.4.0.17">
       <NoWarn>NU1701</NoWarn>
     </PackageReference>
-    <PackageReference Include="Syncfusion.Xamarin.DocIO" Version="15.3.0.33">
+    <PackageReference Include="Syncfusion.Xamarin.DocIO" Version="15.4.0.17">
       <NoWarn>NU1701</NoWarn>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="2.4.0.38779" />
+    <PackageReference Include="Xamarin.Forms" Version="2.5.0.121934" />
   </ItemGroup>
 </Project>

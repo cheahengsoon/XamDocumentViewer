@@ -11,7 +11,10 @@ namespace XamDocumentViewer.Standard
 		{
 			InitializeComponent();
 
-			MainPage = new XamDocumentViewer.Standard.MainPage();
+			MainPage = new NavigationPage(new XamDocumentViewer.Standard.MainPage())
+			{
+				Title = "My Document Viewer"
+			};
 		}
 		public App(DocumentDetails documentDetails)
 		{
@@ -20,12 +23,18 @@ namespace XamDocumentViewer.Standard
 			if (documentDetails.Type.Equals(".Doc", StringComparison.CurrentCultureIgnoreCase))
 			{
 				documentDetails.Type = "Doc";
-				MainPage = new XamDocumentViewer.Standard.MainPage(documentDetails);
+				MainPage = new NavigationPage(new XamDocumentViewer.Standard.MainPage(documentDetails))
+				{
+					Title = "My Document Viewer"
+				};
 			}
 			else if (documentDetails.Type.Equals(".Docx", StringComparison.CurrentCultureIgnoreCase))
 			{
 				documentDetails.Type = "Docx";
-				MainPage = new XamDocumentViewer.Standard.MainPage(documentDetails);
+				MainPage = new NavigationPage(new XamDocumentViewer.Standard.MainPage(documentDetails))
+				{
+					Title = "My Document Viewer"
+				};
 			}
 			else
 			{
